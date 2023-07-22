@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: promtail-argo
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Jeremy4040/argotest.git
+    targetRevision: HEAD
+    path: dev
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
