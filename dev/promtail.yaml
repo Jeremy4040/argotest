@@ -34,15 +34,11 @@ metadata:
 data:
   promtail-config.yaml: |
     scrape_configs:
-      - job_name: system-logs
-        static_configs:
-          - targets:
-              - localhost
-            labels:
-              job: node-logs
+      - job_name: kubernetes-pods
+        kubernetes_sd_configs:
+          - role: pod
         pipeline_stages:
           - docker: {}
-          - drop:
-              regex: ".*health_check.*"
-      # Add more scrape_configs or pipelines as needed
+          - kubernetes_labels:
+              app: promtail
 
